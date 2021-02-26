@@ -33,12 +33,12 @@ jobs:
           poetry run flake8 . --count --exit-zero --statistics
 
       - name: Run black --check .
-        run: black --check .
+        run: poetry run black --check .
 
       - name: If needed, commit black changes to the pull request
         if: failure()
         run: |
-          black .
+          poetry run black .
           git config --global user.name 'autoblack'
           git config --global user.email '1240432+jfear@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
